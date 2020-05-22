@@ -49,7 +49,7 @@ You have to add --force to your helm upgrade command as the labels of the chart 
 | `deploymentStrategy`                      | Deployment strategy                           | `{ "type": "RollingUpdate" }`                           |
 | `livenessProbe`                           | Liveness Probe settings                       | `{ "httpGet": { "path": "/api/health", "port": 3000 } "initialDelaySeconds": 60, "timeoutSeconds": 30, "failureThreshold": 10 }` |
 | `readinessProbe`                          | Readiness Probe settings                      | `{ "httpGet": { "path": "/api/health", "port": 3000 } }`|
-| `securityContext`                         | Deployment securityContext                    | `{"runAsUser": 472, "fsGroup": 472}`                    |
+| `securityContext`                         | Deployment securityContext                    | `{"runAsUser": 472, "runAsGroup": 472, "fsGroup": 472}`  |
 | `priorityClassName`                       | Name of Priority Class to assign pods         | `nil`                                                   |
 | `image.repository`                        | Image repository                              | `grafana/grafana`                                       |
 | `image.tag`                               | Image tag (`Must be >= 5.0.0`)                | `6.7.3`                                                 |
@@ -65,7 +65,7 @@ You have to add --force to your helm upgrade command as the labels of the chart 
 | `service.clusterIP`                       | internal cluster service IP                   | `nil`                                                   |
 | `service.loadBalancerIP`                  | IP address to assign to load balancer (if supported) | `nil`                                            |
 | `service.loadBalancerSourceRanges`        | list of IP CIDRs allowed access to lb (if supported) | `[]`                                             |
-| `serivce.externalIPs`                     | service external IP addresses                 | `[]`                                                    |
+| `service.externalIPs`                     | service external IP addresses                 | `[]`                                                    |
 | `extraExposePorts`                        | Additional service ports for sidecar containers| `[]`                                                   | 
 | `ingress.enabled`                         | Enables Ingress                               | `false`                                                 |
 | `ingress.annotations`                     | Ingress annotations (values are templated)    | `{}`                                                    |
@@ -80,6 +80,7 @@ You have to add --force to your helm upgrade command as the labels of the chart 
 | `affinity`                                | Affinity settings for pod assignment          | `{}`                                                    |
 | `extraInitContainers`                     | Init containers to add to the grafana pod     | `{}`                                                    |
 | `extraContainers`                         | Sidecar containers to add to the grafana pod  | `{}`                                                    |
+| `extraContainerVolumes`                   | Volumes that can be mounted in sidecar containers | `[]`                                                |
 | `schedulerName`                           | Name of the k8s scheduler (other than default) | `nil`                                                  |
 | `persistence.enabled`                     | Use persistent volume to store data           | `false`                                                 |
 | `persistence.type`                        | Type of persistence (`pvc` or `statefulset`)  | `pvc`                                                   |
